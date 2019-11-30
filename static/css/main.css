@@ -13,6 +13,11 @@ td.linked {
   background-color: #edf2f7;
 }
 
+th.linked-title,
+td.linked-title {
+  opacity: 0.7;
+}
+
 .scaled {
   transform: scale(0.7);
   transform-origin: top;

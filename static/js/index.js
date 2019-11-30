@@ -50,24 +50,42 @@ class Pokemon {
         };
         /** @type {Object.<number, Array<string>} */
         this.elementStyle = {
+            /** 一般 */
             0: [],
-            1: [],
-            2: [],
-            3: [],
-            4: [],
-            5: [],
-            6: [],
-            7: [],
-            8: [],
-            9: [],
-            10: [],
-            11: [],
-            12: [],
-            13: [],
-            14: [],
-            15: [],
-            16: [],
-            17: [],
+            /** 格鬥 */
+            1: ['bg-red-800', 'text-white'],
+            /** 飛行 */
+            2: ['bg-blue-300'],
+            /** 毒 */
+            3: ['bg-purple-600', 'text-white'],
+            /** 地面 */
+            4: ['bg-yellow-500'],
+            /** 岩石 */
+            5: ['bg-yellow-700', 'text-white'],
+            /** 蟲 */
+            6: ['bg-green-400'],
+            /** 幽靈 */
+            7: ['bg-indigo-300'],
+            /** 鋼 */
+            8: ['bg-gray-500'],
+            /** 火 */
+            9: ['bg-red-600', 'text-white'],
+            /** 水 */
+            10: ['bg-blue-600', 'text-white'],
+            /** 草 */
+            11: ['bg-green-600', 'text-white'],
+            /** 電 */
+            12: ['bg-yellow-300'],
+            /** 超能力 */
+            13: ['bg-pink-500', 'text-white'],
+            /** 冰 */
+            14: ['bg-blue-200'],
+            /** 龍 */
+            15: ['bg-purple-300'],
+            /** 惡 */
+            16: ['bg-orange-700', 'text-white'],
+            /** 妖精 */
+            17: ['bg-pink-200'],
         };
     }
 }
@@ -108,6 +126,7 @@ function genTableHeader(thead, poke) {
         eleTh.classList.add(...cellStyle);
         eleTh.classList.add(...sizeStyle);
         eleTh.classList.add(...poke.elementStyle[index]);
+        eleTh.classList.add('text-lg', 'text-title');
         eleTh.colSpan = 1;
         eleTh.textContent = value;
         eleTh.dataset.element = index;
@@ -145,7 +164,8 @@ function genTableBody(tbody, poke) {
         let titleTd = eleTr.insertCell();
         titleTd.classList.add(...cellStyle);
         titleTd.classList.add(...sizeStyle);
-        titleTd.classList.add('text-title', 'text-gray-800');
+        titleTd.classList.add(...poke.elementStyle[attackElementId]);
+        titleTd.classList.add('text-lg', 'text-title');
         titleTd.dataset.attack = attackElementId;
         titleTd.dataset.defense = -1;
         titleTd.textContent = attackValue;
@@ -189,9 +209,17 @@ docReady(() => {
 
                 if (linkedTd.dataset.attack == target.dataset.attack ||
                     linkedTd.dataset.defense == target.dataset.defense) {
-                    linkedTd.classList.add('linked');
+                    if (linkedTd.dataset.defense == -1) {
+                        linkedTd.classList.add('linked-title');
+                    } else {
+                        linkedTd.classList.add('linked');
+                    }
                 } else {
-                    linkedTd.classList.remove('linked');
+                    if (linkedTd.dataset.defense == -1) {
+                        linkedTd.classList.remove('linked-title');
+                    } else {
+                        linkedTd.classList.remove('linked');
+                    }
                 }
             }
 
@@ -201,9 +229,9 @@ docReady(() => {
                 }
 
                 if (linkedTh.dataset.element == target.dataset.defense) {
-                    linkedTh.classList.add('linked');
+                    linkedTh.classList.add('linked-title');
                 } else {
-                    linkedTh.classList.remove('linked');
+                    linkedTh.classList.remove('linked-title');
                 }
             }
         });
@@ -217,9 +245,9 @@ docReady(() => {
             }
 
             for (let linkedTh of ths) {
-                linkedTh.classList.remove('linked');
+                linkedTh.classList.remove('linked-title');
             }
-            target.classList.add('linked');
+            target.classList.add('linked-title');
 
             for (let linkedTd of tds) {
                 if (linkedTd.dataset.attack === undefined ||
@@ -228,9 +256,9 @@ docReady(() => {
                 }
 
                 if (linkedTd.dataset.defense == target.dataset.element) {
-                    linkedTd.classList.add('linked');
+                    linkedTd.classList.add('linked-title');
                 } else {
-                    linkedTd.classList.remove('linked');
+                    linkedTd.classList.remove('linked-title');
                 }
             }
         });
