@@ -1,0 +1,1 @@
+npx tailwind build .\dev\style.css -o .\static\css/style.css

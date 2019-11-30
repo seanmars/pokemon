@@ -1,0 +1,14 @@
+table td.v-lr span {
+  writing-mode: vertical-lr;
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: vertical-lr;
+}
+
+td.text-title {
+  font-weight: bold;
+}
+
+th.linked,
+td.linked {
+  background-color: #edf2f7;
+}
