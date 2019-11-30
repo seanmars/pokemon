@@ -12,3 +12,8 @@ th.linked,
 td.linked {
   background-color: #edf2f7;
 }
+
+.scaled {
+  transform: scale(0.7);
+  transform-origin: top;
+}
